@@ -26,10 +26,10 @@ fetch('data/base-locations.geojson')
           // Create a popup with relevant feature properties
           var popupContent = `
             <strong>Site Name:</strong> ${feature.properties.siteName}<br>
-            <strong>Feature Name:</strong> ${feature.properties.featureName}<br>
-            <strong>Operational Status:</strong> ${feature.properties.siteOperationalStatus}<br>
-            <strong>State:</strong> ${feature.properties.stateNameCode}<br>
-            <strong>FIRRMA Site:</strong> ${feature.properties.isFirrmaSite}
+            <strong>Type:</strong> ${feature.properties.siteReportingComponent}<br>
+            <strong>Operational:</strong> ${feature.properties.siteOperationalStatus}<br>
+            <strong>FIRRMA:</strong> ${feature.properties.isFirrmaSite}<br>
+            <strong>State:</strong> ${feature.properties.stateNameCode}
           `;
           layer.bindPopup(popupContent);
         }
