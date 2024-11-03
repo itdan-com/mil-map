@@ -25,7 +25,7 @@ fetch('data/base-locations.geojson')
         if (feature.properties) {
           // Create a popup with relevant feature properties
           var popupContent = `
-            <strong>Site Name:</strong> ${feature.properties.siteName}<br>
+            <strong>${feature.properties.siteName}</strong><br>
             <strong>Type:</strong> ${feature.properties.siteReportingComponent}<br>
             <strong>Operational:</strong> ${feature.properties.siteOperationalStatus}<br>
             <strong>FIRRMA:</strong> ${feature.properties.isFirrmaSite}<br>
