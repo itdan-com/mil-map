@@ -23,16 +23,43 @@ fetch('data/base-locations.geojson')
       onEachFeature: function (feature, layer) {
         // Check if feature properties exist
         if (feature.properties) {
-          // Create a popup with relevant feature properties
-          var popupContent = `
+          // Create content for the tooltip/popup with relevant feature properties
+          var content = `
             <strong>${feature.properties.siteName}</strong><br>
             <strong>Type:</strong> ${feature.properties.siteReportingComponent}<br>
             <strong>Operational:</strong> ${feature.properties.siteOperationalStatus}<br>
             <strong>FIRRMA:</strong> ${feature.properties.isFirrmaSite}<br>
             <strong>State:</strong> ${feature.properties.stateNameCode}
           `;
-          layer.bindPopup(popupContent);
+
+          // Bind a tooltip that shows on hover
+          layer.bindTooltip(content, {
+            permanent: false,
+            direction: 'top',
+            opacity: 0.9
+          });
+
+          // Bind a popup that stays open on click
+          layer.bindPopup(content);
+
+          // Open the tooltip on mouseover
+          layer.on('mouseover', function (e) {
+            this.openTooltip();
+          });
+
+          // Close the tooltip on mouseout
+          layer.on('mouseout', function (e) {
+            if (!this.isPopupOpen()) {
+              this.closeTooltip();
+            }
+          });
+
+          // Open the popup on click
+          layer.on('click', function (e) {
+            this.openPopup();
+          });
         }
+
         // Add the layer to the cluster group
         markers.addLayer(layer);
       }
