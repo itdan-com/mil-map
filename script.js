@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Load GeoJSON data
-fetch('https://raw.githubusercontent.com/itdan-com/mil-map/main/data/base-locations.geojson')
+fetch('data/base-locations.geojson')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
