@@ -1,5 +1,5 @@
 // Create the map and set the initial view
-var map = L.map('map').setView([37.0902, -95.7129], 5); // Replace with your desired center coordinates and zoom level
+var map = L.map('map').setView([37.0902, -95.7129], 5); // Center coordinates for the U.S. with a zoom level of 5
 
 // Add a tile layer (e.g., OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -8,7 +8,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Load GeoJSON data
 fetch('https://raw.githubusercontent.com/itdan-com/mil-map/main/data/base-locations.geojson')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
   .then(data => {
     L.geoJSON(data).addTo(map);
   })
