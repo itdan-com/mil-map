@@ -1,5 +1,3 @@
-
-<script>
 // Create the map and set the initial view
 var map = L.map('map').setView([37.0902, -95.7129], 5); // Center coordinates for the U.S. with a zoom level of 5
 
@@ -44,4 +42,3 @@ fetch('data/base-locations.geojson')
     map.addLayer(markers);
   })
   .catch(err => console.error('Error loading GeoJSON:', err));
-</script>
