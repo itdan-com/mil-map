@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Load GeoJSON data
-fetch('data/your-data.geojson')
+fetch('data/base-locations.geojson')
   .then(response => response.json())
   .then(data => {
     L.geoJSON(data).addTo(map);
