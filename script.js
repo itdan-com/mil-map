@@ -15,6 +15,22 @@ fetch('data/base-locations.geojson')
     return response.json();
   })
   .then(data => {
-    L.geoJSON(data).addTo(map);
+    // Add GeoJSON data to the map with interaction
+    L.geoJSON(data, {
+      onEachFeature: function (feature, layer) {
+        // Check if feature properties exist
+        if (feature.properties) {
+          // Create a popup with relevant feature properties
+          var popupContent = `
+            <strong>Site Name:</strong> ${feature.properties.siteName}<br>
+            <strong>Feature Name:</strong> ${feature.properties.featureName}<br>
+            <strong>Operational Status:</strong> ${feature.properties.siteOperationalStatus}<br>
+            <strong>State:</strong> ${feature.properties.stateNameCode}<br>
+            <strong>FIRRMA Site:</strong> ${feature.properties.isFirrmaSite}
+          `;
+          layer.bindPopup(popupContent);
+        }
+      }
+    }).addTo(map);
   })
   .catch(err => console.error('Error loading GeoJSON:', err));
